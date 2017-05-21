@@ -3,7 +3,6 @@
     public enum EngineType
     {
         Gasoline = 1,
-        Diesel = 2,
-        Hybrid = 3
+        Diesel = 2
     }
 }
