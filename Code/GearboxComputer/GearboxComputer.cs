@@ -82,7 +82,7 @@ namespace GearboxComputer
             }
             else
             {
-                int speedInteger = Convert.ToInt32(data.VehicleSpeed); // use integer for speed to avoid slow calculations
+                int speedInteger = data.VehicleSpeed;
                 int correction = 15;
 
                 if (data.DrivingMode == DrivingMode.Economycal)

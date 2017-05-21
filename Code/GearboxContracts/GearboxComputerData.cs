@@ -2,7 +2,7 @@
 {
     public class GearboxComputerData
     {
-        public float VehicleSpeed { get; set; }
+        public int VehicleSpeed { get; set; }
 
         public int RPM { get; set; }
 
