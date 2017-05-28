@@ -18,7 +18,7 @@ namespace GearboxComputer
             /// SysGB-COMP-11
             if (!Validator.IsGearboxValid(gearbox))
             {
-                communication.Warn("Gearbox is receiving wrong data");
+                communication.Warn("Gearbox is receiving wrong data!");
                 throw new Exception("Gearbox is invalid!");
             }
 
@@ -29,12 +29,25 @@ namespace GearboxComputer
             this.warnMessages = 0;
         }
 
+        public int CurrentGear
+        {
+            get
+            {
+                return this.currentGear;
+            }
+
+            set
+            {
+                this.currentGear = value;
+            }
+        }
+
         private void SendWarning()
         {
             if (warnMessages >= 1000)
             {
                 /// SysGB-COMP-20
-                this.communication.Warn("Gearbox is receiving wrong data");
+                this.communication.Warn("Gearbox is receiving wrong data!");
                 this.warnMessages = 0;
             }
             else
@@ -52,13 +65,13 @@ namespace GearboxComputer
             /// SysGB-COMP-17
             if (Validator.IsGearValid(gear, maxGears))
             {
-                this.currentGear = gear;
+                this.CurrentGear = gear;
             }
         }
 
         public void Calculate(GearboxComputerData data)
         {
-            int predictedGear = this.currentGear;
+            int predictedGear = this.CurrentGear;
 
             /// SysGB-COMP-18
             if (!Validator.IsDataReadingValid(data))
@@ -176,10 +189,10 @@ namespace GearboxComputer
             }
 
             /// SysGB-COMP-48, SysGB-COMP-49, SysGB-COMP-50
-            if (predictedGear != currentGear)
+            if (predictedGear != this.CurrentGear)
             {
                 /// SysGB-COMP-46, SysGB-COMP-47
-                this.listener.Receive(this.currentGear, predictedGear); // We have update for the gear
+                this.listener.Receive(this.CurrentGear, predictedGear); // We have update for the gear
             }
         }
     }
