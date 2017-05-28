@@ -4,6 +4,7 @@ namespace GearboxContracts
 {
     public interface IGearBox
     {
+        /// SysGB-COMP-3
         int GearsCount { get; }
 
         // As speed in km/h. Example:
