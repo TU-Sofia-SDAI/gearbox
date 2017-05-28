@@ -10,7 +10,7 @@ namespace GearboxComputer
             var gearbox = new FiveSpeedGearBox.FiveSpeedGearBox();
             var listener = new Listener();
             var communicator = new Communicator();
-            var gearboxComputer = new GearboxComputer(EngineType.Diesel, gearbox, listener, communicator);
+            var gearboxComputer = new GearboxComputerLogic(EngineType.Diesel, gearbox, listener, communicator);
 
             gearboxComputer.SetGear(2);
 

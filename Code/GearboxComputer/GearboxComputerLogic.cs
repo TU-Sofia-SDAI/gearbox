@@ -3,7 +3,7 @@ using System;
 
 namespace GearboxComputer
 {
-    public class GearboxComputer
+    public class GearboxComputerLogic
     {
         private int currentGear;
         private IGearBox gearbox;
@@ -13,7 +13,7 @@ namespace GearboxComputer
         private int warnMessages;
 
         // When gearbox is initialized, it should get the right config
-        public GearboxComputer(EngineType engineType, IGearBox gearbox, IGearboxComputerListener listener, ICarComunication communication)
+        public GearboxComputerLogic(EngineType engineType, IGearBox gearbox, IGearboxComputerListener listener, ICarComunication communication)
         {
             /// SysGB-COMP-11
             if (!Validator.IsGearboxValid(gearbox))
