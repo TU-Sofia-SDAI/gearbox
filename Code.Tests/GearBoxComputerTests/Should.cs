@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using GearboxComputer;
 using GearboxContracts;
-using GearboxComputer.GearboxComputer;
 using Moq;
 
 namespace Code.Tests.GearBoxComputerTests
