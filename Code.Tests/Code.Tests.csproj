@@ -65,6 +65,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="GearBoxComputerTests\Should.cs" />
+    <Compile Include="GearBoxComputerTests\SetGearMethod.cs" />
+    <Compile Include="GearBoxComputerTests\CalculateMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatorTests\IsGearValidMethod.cs" />
     <Compile Include="ValidatorTests\IsGearboxValidMethod.cs" />
