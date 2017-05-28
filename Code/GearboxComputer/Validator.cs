@@ -2,7 +2,7 @@
 
 namespace GearboxComputer
 {
-    internal static class Validator
+    public static class Validator
     {
         public static bool IsDataReadingValid(GearboxComputerData data)
         {
