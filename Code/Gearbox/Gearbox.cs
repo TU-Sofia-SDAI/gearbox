@@ -1,9 +1,5 @@
 ﻿using GearboxContracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GearboxComputer
 {
@@ -13,16 +9,17 @@ namespace GearboxComputer
         {
             var gearbox = new FiveSpeedGearBox.FiveSpeedGearBox();
             var listener = new Listener();
-            var gearboxComputer = new GearboxComputer(EngineType.Diesel, gearbox, listener);
+            var communicator = new Communicator();
+            var gearboxComputer = new GearboxComputer(EngineType.Diesel, gearbox, listener, communicator);
 
             gearboxComputer.SetGear(2);
 
             gearboxComputer.Calculate(
                 new GearboxComputerData {
-                    AccelerationLevel = 100,
+                    AccelerationLevel = 30,
                     DrivingMode = DrivingMode.Normal,
                     RPM = 2000,
-                    VehicleSpeed = 110
+                    VehicleSpeed = 100
                 });
 
         }
@@ -33,6 +30,19 @@ namespace GearboxComputer
         public void Receive(int currentGear, int nextGear)
         {
             Console.WriteLine("Current gear is {0}, and gearbox computer suggests {1}", currentGear, nextGear);
+        }
+    }
+
+    public class Communicator : ICarComunication
+    {
+        public void Log(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public void Warn(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

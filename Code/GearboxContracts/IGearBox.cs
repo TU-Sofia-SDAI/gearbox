@@ -14,6 +14,7 @@ namespace GearboxContracts
         // 4. 160 km/h
         // 5. 190 km/h
         // 6. 210 km/h
+        /// SysGB-COMP-24
         List<float> GearsRatios { get; }
     }
 }

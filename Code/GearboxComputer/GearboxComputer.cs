@@ -9,20 +9,51 @@ namespace GearboxComputer
         private IGearBox gearbox;
         private EngineType engineType;
         private IGearboxComputerListener listener;
+        private ICarComunication communication;
+        private int warnMessages;
 
         // When gearbox is initialized, it should get the right config
-        public GearboxComputer(EngineType engineType, IGearBox gearbox, IGearboxComputerListener listener)
+        public GearboxComputer(EngineType engineType, IGearBox gearbox, IGearboxComputerListener listener, ICarComunication communication)
         {
-            // TODO: validate those
+            /// SysGB-COMP-11
+            if (!Validator.IsGearboxValid(gearbox))
+            {
+                communication.Warn("Gearbox is receiving wrong data");
+                throw new Exception("Gearbox is invalid!");
+            }
+
             this.gearbox = gearbox;
             this.engineType = engineType;
             this.listener = listener;
+            this.communication = communication;
+            this.warnMessages = 0;
+        }
+
+        private void SendWarning()
+        {
+            if (warnMessages >= 1000)
+            {
+                /// SysGB-COMP-20
+                this.communication.Warn("Gearbox is receiving wrong data");
+                this.warnMessages = 0;
+            }
+            else
+            {
+                /// SysGB-COMP-19
+                this.communication.Log("Gearbox computer data is invalid!");
+                this.warnMessages++;
+            }
         }
 
         // When driver or something changes gear, gearbox computer must know
         public void SetGear(int gear)
         {
-            this.currentGear = gear;
+            int maxGears = this.gearbox.GearsCount;
+            /// SysGB-COMP-17
+            if (Validator.IsGearValid(gear, maxGears))
+            {
+                this.currentGear = gear;
+            }
         }
 
         public void Calculate(GearboxComputerData data)
@@ -30,16 +61,19 @@ namespace GearboxComputer
             int predictedGear = this.currentGear;
 
             /// SysGB-COMP-18
-            if (!IsDataReadingValid(data))
+            if (!Validator.IsDataReadingValid(data))
             {
+                this.SendWarning();
                 return; // TODO: log it somewhere and count to 1000 log to somewhere else
             }
 
             /// SysGB-COMP-25
             if (data.AccelerationLevel < 65)
             {
-                int nextGearRPM = 2000;
+                /// SysGB-COMP-27
+                int nextGearRPM = 2500;
 
+                /// SysGB-COMP-28
                 if (this.engineType == EngineType.Gasoline)
                 {
                     nextGearRPM += 500;
@@ -51,9 +85,10 @@ namespace GearboxComputer
                     nextGearRPM *= 2;
                 }
 
-                if (data.DrivingMode == DrivingMode.Normal)
+                /// SysGB-COMP-30
+                if (data.DrivingMode == DrivingMode.Economycal)
                 {
-                    nextGearRPM += 500;
+                    nextGearRPM -= 500;
                 }
 
                 /// SysGB-COMP-31
@@ -122,6 +157,7 @@ namespace GearboxComputer
                     if (this.gearbox.GearsRatios[i] > speedInteger)
                     {
                         predictedGear = (i + 1);
+                        break;
                     }
                 }
 
@@ -145,29 +181,6 @@ namespace GearboxComputer
                 /// SysGB-COMP-46, SysGB-COMP-47
                 this.listener.Receive(this.currentGear, predictedGear); // We have update for the gear
             }
-        }
-
-        public static bool IsDataReadingValid(GearboxComputerData data)
-        {
-            /// SysGB-COMP-16
-            if (data.AccelerationLevel > 100 || data.AccelerationLevel < 0)
-            {
-                return false;
-            }
-
-            /// SysGB-COMP-13
-            if (data.RPM < 0 || data.RPM > 9000) // For formula 1 bolids, use different check
-            {
-                return false;
-            }
-
-            /// SysGB-COMP-14
-            if (data.VehicleSpeed < 0 || data.VehicleSpeed > 300) // Again, this is for normal cars
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DrivingMode.cs" />
     <Compile Include="EngineType.cs" />
+    <Compile Include="ICarComunication.cs" />
     <Compile Include="IGearBox.cs" />
     <Compile Include="GearboxComputerData.cs" />
     <Compile Include="IGearboxComputerListener.cs" />
