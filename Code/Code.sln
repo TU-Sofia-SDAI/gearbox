@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GearboxComputer", "GearboxC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code.Tests", "..\Code.Tests\Code.Tests.csproj", "{94C67167-93EF-4D07-BE07-5A37391F9C38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpGearbox", "HttpGearbox\HttpGearbox.csproj", "{C780F6C8-D843-4532-BD05-F9779EAC3819}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{94C67167-93EF-4D07-BE07-5A37391F9C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94C67167-93EF-4D07-BE07-5A37391F9C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94C67167-93EF-4D07-BE07-5A37391F9C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C780F6C8-D843-4532-BD05-F9779EAC3819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C780F6C8-D843-4532-BD05-F9779EAC3819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C780F6C8-D843-4532-BD05-F9779EAC3819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C780F6C8-D843-4532-BD05-F9779EAC3819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
