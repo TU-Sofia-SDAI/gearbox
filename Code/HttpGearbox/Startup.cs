@@ -91,7 +91,11 @@ namespace HttpGearbox
         }
         public void Receive(int currentGear, int nextGear)
         {
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(new { currentGear = currentGear, nextGear = nextGear });
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(new
+            {
+                moduleName = "Gearbox",
+                value = new { currentGear = currentGear, nextGear = nextGear }
+            });
             string result = "";
             using (var client = new WebClient())
             {
